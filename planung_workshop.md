@@ -31,12 +31,12 @@ Workshop zur Edirom Summer School 2025
 * Überblick über die Kurszeiten
 
 ## XML-Basics – Wie funktioniert XML?
-* Elemente, Attribute, Entitäten, XML-Deklaration, Namespace
+* Elemente, Attribute, Entitäten, XML-Deklaration, Namespace ([mehr](https://www.data2type.de/xml-xslt-xslfo/xml/xml-in-a-nutshell/xml-grundlagen))
 * Grundlegen für XML
   * Wohlgeformtheit
   * Key-sensitivity
   * uniqueness
-* Die XML-Achsen und Vererbungslehre
+* Die [XML-Achsen](https://www.data2type.de/xml-xslt-xslfo/xpath/xpath-einfuehrung/knotentypen-und-achsen)
   * `self::node()`
   * `parent::node()`, `child::node()`
   * `ancestor::node()`, `descendant::node()`
@@ -55,6 +55,7 @@ Workshop zur Edirom Summer School 2025
 * Wofür steht die Abkürzung XSLT?
 * Was ist/macht XSLT?
 * Wofür wird XSLT verwendet?
+* Tipps: [XSLT-Kochbuch](https://www.data2type.de/xml-xslt-xslfo/xslt/xslt-kochbuch), [XPath Funktionen](https://www.datypic.com/xq/)
 
 ## Mein erstes XSLT-Skript
 * Grundaufbau (XML-Struktur)
@@ -89,7 +90,7 @@ Mit dem vorliegenden Ergebnis soll nun in mehreren Schritten weitergearbeitet we
 
 ## Ausblick
 * Zeigen von Anwendungsfällen (z.B. Erzeugung des Kritischen Berichts bei Henze-Digital)
-* Kurzer Ausblick zu XSL-FO
+* Kurzer Ausblick zu [XSL-FO](https://www.data2type.de/xml-xslt-xslfo/xsl-fo)
 * Ausblick zu Abstraktionsebenen (`@mode`)
 
 
@@ -103,6 +104,7 @@ Mit dem vorliegenden Ergebnis soll nun in mehreren Schritten weitergearbeitet we
     * Update (insert, delete)
     * JSON-Map (HTML-Templating)
 * Was ist der Unterschied zu XSLT?
+* Tipp: [Priscilla Walmsley](https://www.datypic.com/books/xquery/)
 
 ## Mein erstes XQuery-Skript
 * Grundaufbau (Präambel, FLOWR)
@@ -111,7 +113,6 @@ Mit dem vorliegenden Ergebnis soll nun in mehreren Schritten weitergearbeitet we
 
 ## Daten neu strukturieren
 Wiederholen Sie die Aufgaben aus dem Kapitel zu XSLT (hier kurze Übersicht) und setzen Sie diese mit XQuery um. Vor Aufgabe 2b beschäftigen wir uns gemeinsam mit dem Thema "Funktionen in XQuery".
-
 
 
 # Sitzung 5 Hilfsmittel für die Praxis
