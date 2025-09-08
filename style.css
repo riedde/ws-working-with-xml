@@ -1,0 +1,68 @@
+:root {
+  --main-bg-color: #b1e053;
+}
+
+body {
+  font-family: 'Source Sans Pro', sans-serif !important;
+}
+
+h1.lia-h1 {
+  font-size:5vw !important;
+  margin-left:auto !important;
+  margin-right:auto !important;
+}
+
+#lia-spacer-right {
+  background-image: url("https://wcms.itz.uni-halle.de/download.php?down=57357&elem=3333420") !important;
+  background-position: center !important;
+  background-size: 36px !important;
+  background-repeat: no-repeat !important;
+}
+
+
+.lia-content{
+  background-image: url("https://wcms.itz.uni-halle.de/download.php?down=57357&elem=3333420") !important;
+  background-size: 200px !important;
+  background-repeat: no-repeat !important;
+  background-position: center !important;
+}
+
+.lia-toolbar {
+  background: var(--main-bg-color) !important;
+}
+
+.lia-btn {
+  background: var(--main-bg-color) !important;
+}
+
+.lia-input {
+  background: var(--main-bg-color) !important;
+}
+
+.lia-active {
+  background: var(--main-bg-color) !important;
+}
+
+.lia-quote {
+  background: var(--main-bg-color) !important;
+  border-left-color: #993c8c !important;
+  color: #FFFFFF !important
+}
+
+.lia-accordion {
+  background: var(--main-bg-color) !important;
+  font-size: 12px !important;
+}
+
+.lia-accordion-dummy {
+  background: var(--main-bg-color) !important;
+  font-size: 12px !important;
+}
+
+.lia-quiz {
+  border-color: var(--main-bg-color) !important;
+}
+
+.lia-link {
+  color: #993c8c !important
+}
