@@ -107,7 +107,7 @@ Die wichtigsten Aspekte zum Thema XML:
 ****************
 {{2}}
 ****************
-* 
+
 * Entitäten:
 
   * `&` = `&amp;`
@@ -118,6 +118,12 @@ Die wichtigsten Aspekte zum Thema XML:
   * [weitere...](https://wiki.selfhtml.org/wiki/Zeichenreferenz)
 ****************
 
+                 {{3}}
+************************************************
+
+* [mehr zum Thema](https://www.data2type.de/xml-xslt-xslfo/xml/xml-in-a-nutshell/xml-grundlagen)
+
+************************************************
 ### Wohlgeformtheit
 
 Ein XML-Dokument ist wohlgeformt wenn...
@@ -163,7 +169,7 @@ XPath ist wie ein Navigationssystem für XML-Dokumente.
 
 ### XPath-Basics
 {{0}}
-* Die wichtigsten Achsen:
+* Die [XML-Achsen](https://www.data2type.de/xml-xslt-xslfo/xpath/xpath-einfuehrung/knotentypen-und-achsen):
   
   * `self::node()`
   * `parent::node()`, `child::node()`
@@ -301,6 +307,7 @@ XSLT ist eine mächtige Sprache zur Transformation von XML-Dokumenten.
 
 * Ausgabeformate: XML, HTML, Text, etc.
 
+* Wichtige Seiten: [XSLT-Kochbuch](https://www.data2type.de/xml-xslt-xslfo/xslt/xslt-kochbuch), [XPath Funktionen](https://www.datypic.com/xq/)
 ### Grundlagen XSLT
 
 {{0}}
@@ -571,6 +578,11 @@ Helft euch selbst und allen, die eure Skripte nachnutzen oder überarbeiten woll
 </xsl:function>
 ```
 
+### Ausblick
+* Zeigen von Anwendungsfällen (z.B. Erzeugung des Kritischen Berichts bei Henze-Digital)
+* Kurzer Ausblick zu [XSL-FO](https://www.data2type.de/xml-xslt-xslfo/xsl-fo)
+* Ausblick zu Abstraktionsebenen (`@mode`)
+
 ## XQuery Transformation
 
 XQuery ermöglicht uns komplexe Abfragen und Transformationen von XML-Daten.
@@ -596,6 +608,7 @@ XQuery ermöglicht uns komplexe Abfragen und Transformationen von XML-Daten.
   * erlaubt mehrstufige Verarbeitungsanweiung
   * erlaubt JSON-Maps als output (DB-interne Verarbeitung)
 
+* mehr dazu bei [Priscilla Walmsley](https://www.datypic.com/books/xquery/)
 ### XQuery Beispiel
 
 ```xquery
@@ -619,15 +632,48 @@ for $person in $document//tei:person
 
 Wiederholen Sie die XSLT-Aufgaben mit XQuery.
 
-**Lösung für Aufgabe 1a in XQuery:**
+Aufgabe 1: Erstellen einer HTML-Liste
+
+Erstelle eine HMTL-Liste, die die Namen alphabetisch auflistet.
+
+_TIPP: Erstelle eine Variable `$persons`, die du weiterverarbeitest. Erstelle eine zweite Variable `$lines`, die du im Return zurückgibst. Spare beim skripten nicht an Variablen._
+
+_Tipp: Du kannst in XQuery auch direkt html schreiben, und dort wieder XQuery. Das musst du nur durch `{}`aufrufen._
 
 ```xquery
 xquery version "3.1";
 
-let $doc := doc("persName.xml")
+declare default element namespace "http://www.w3.org/1999/xhtml";
+declare namespace tei="http://www.tei-c.org/ns/1.0";
+
+let $document:= doc('../examples/listPerson.xml')
+
+let $persons := $document//tei:person
+
+let $lines := for $person in $persons
+                let $surname := $person//tei:surname
+                let $forename := $person//tei:forename => string-join(' ')
+                let $name := string-join(($surname,$forename),', ')
+                return
+                    element li {$name}
+
 return
-    concat($doc//surname/text(), ", ", $doc//forename/text())
+   <html xmlns="http://www.w3.org/1999/xhtml">
+       <head>
+           <title>Meine Ergebnisliste</title>
+       </head>
+       <body>
+           <ul>
+               {for $line in $lines
+                    order by $line descending
+                    return
+                        $line
+               }
+           </ul>
+       </body>
+   </html>
 ```
+
 
 ## Praktische Werkzeuge
 

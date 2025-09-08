@@ -4,7 +4,6 @@
     xmlns:tei="http://www.tei-c.org/ns/1.0"
     version="3.0">
     
-    <xd:doc>dlösgjaöldgjaälfkj</xd:doc>
     <xsl:template match="/">
         <html xmlns="http://www.w3.org/1999/xhtml">
             <head>

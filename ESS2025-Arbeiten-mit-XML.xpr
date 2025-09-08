@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project>
+    <meta>
+        <filters directoryPatterns="" filePatterns="\QESS2025-Arbeiten-mit-XML.xpr\E" positiveFilePatterns="" showHiddenFiles="false"/>
+        <options/>
+    </meta>
+    <projectTree name="ESS2025-Arbeiten-mit-XML.xpr">
+        <folder path="."/>
+    </projectTree>
+</project>
