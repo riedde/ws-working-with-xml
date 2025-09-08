@@ -20,9 +20,10 @@ Herzlich willkommen zum Workshop "Arbeiten mit XML"!
 * Dozent: Jun.-Prof. Dr. Dennis Ried
 * Datum: 11.-12.09.2025
 * Raum: 1.110
-* Zeiten: 
-    * Do: 11:15–17:45 Uhr
-    * Fr: 9:15–12:45 Uhr
+* Zeiten:
+  
+  * Do: 11:15–17:45 Uhr
+  * Fr: 9:15–12:45 Uhr
 
 ## Vorstellungsrunde
 
@@ -30,9 +31,11 @@ Herzlich willkommen zum Workshop "Arbeiten mit XML"!
 Beginnen wir mit einer kurzen Vorstellungsrunde.
 
 * Teilnehmende
-    * Name, ggf. Institution
-    * Vorerfahrungen mit dem Thema
-    * Erwartungen an den Workshop/Eigene Ziele
+
+  * Name, ggf. Institution
+  * Vorerfahrungen mit dem Thema
+  * Erwartungen an den Workshop/Eigene Ziele
+
 * Kurzvorstellung des Dozenten
 * Überblick über die Kurszeiten
 
@@ -78,7 +81,14 @@ Lassen Sie uns zunächst die grundlegenden Konzepte von XML kennenlernen.
 * Attribute: `<name art="amtlich">`
 * XML-Deklaration: `<?xml version="1.0" encoding="UTF-8"?>`
 * Namespaces: `xmlns="http://www.example.org"`
-* Entitäten: `& = &amp;`, `< = &lt;`, `> = &gt;`, ...
+* Entitäten:
+
+  * `&` = `&amp;`
+  * `<` = `&lt;`
+  * `>` = `&gt;`
+  * `"`= `&quot;`
+  * `'`= `&apos;`
+  * [uvm.](https://wiki.selfhtml.org/wiki/Zeichenreferenz)
 
 ### Wohlgeformtheit
 
@@ -89,6 +99,7 @@ Ein XML-Dokument ist wohlgeformt wenn...
 * Elemente ineinander geschachtelt und nicht verschränkt (!) sind
 
 Zu Beachten:
+
 * Was auf geht, muss auch zu gehn!
 * Groß-/Kleinschreibung!
 
