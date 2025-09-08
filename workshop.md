@@ -5,7 +5,9 @@ version: 1.0.0
 language: de
 narrator: Deutsch Female
 comment: Workshop zur Edirom Summer School 2025
+mode: Presentation
 link: https://github.com/riedde/ws-working-with-xml/blob/main/style.css
+      https://fonts.googleapis.com/css?family=Source+Sans+3
 -->
 
 # Arbeiten mit XML
