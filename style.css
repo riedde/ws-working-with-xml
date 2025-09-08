@@ -1,9 +1,12 @@
 :root {
-  --main-bg-color: #b1e053;
+  --mlu-green: #b1e053;
+  --mlu-violet: #993c8c;
+  --main-mlu-color: var(--mlu-green);
+  --main-accent-color: var(--mlu-violet);
 }
 
-body {
-  font-family: 'Source Sans Pro', sans-serif !important;
+body, h1, h2, h3, h4, h5, h6 {
+  font-family: 'Source Sans 3', sans-serif !important;
 }
 
 h1.lia-h1 {
@@ -11,6 +14,7 @@ h1.lia-h1 {
   margin-left:auto !important;
   margin-right:auto !important;
 }
+
 
 #lia-spacer-right {
   background-image: url("https://wcms.itz.uni-halle.de/download.php?down=57357&elem=3333420") !important;
@@ -28,41 +32,46 @@ h1.lia-h1 {
 }
 
 .lia-toolbar {
-  background: var(--main-bg-color) !important;
+  background: var(--main-mlu-color) !important;
 }
 
 .lia-btn {
-  background: var(--main-bg-color) !important;
+  background: var(--main-mlu-color) !important;
 }
 
 .lia-input {
-  background: var(--main-bg-color) !important;
+  background: var(--main-mlu-color) !important;
 }
 
 .lia-active {
-  background: var(--main-bg-color) !important;
+  background: var(--main-mlu-color) !important;
 }
 
 .lia-quote {
-  background: var(--main-bg-color) !important;
-  border-left-color: #993c8c !important;
+  background: var(--main-mlu-color) !important;
+  border-left-color: var(--main-accent-color) !important;
   color: #FFFFFF !important
 }
 
 .lia-accordion {
-  background: var(--main-bg-color) !important;
+  background: var(--main-mlu-color) !important;
   font-size: 12px !important;
 }
 
 .lia-accordion-dummy {
-  background: var(--main-bg-color) !important;
+  background: var(--main-mlu-color) !important;
   font-size: 12px !important;
 }
 
 .lia-quiz {
-  border-color: var(--main-bg-color) !important;
+  border-color: var(--main-mlu-color) !important;
 }
 
-.lia-link {
-  color: #993c8c !important
+.lia-link, .lia-active {
+  color: var(--main-accent-color) !important
+}
+
+.lia-pagination__content {
+  background: var(--main-mlu-color);
+  color: var(--main-accent-color);
 }

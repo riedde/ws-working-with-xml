@@ -6,8 +6,8 @@ language: de
 narrator: Deutsch Female
 comment: Workshop zur Edirom Summer School 2025
 mode: Presentation
-link: https://github.com/riedde/ws-working-with-xml/blob/main/style.css
-      https://fonts.googleapis.com/css?family=Source+Sans+3
+icon: https://wcms.itz.uni-halle.de/download.php?down=57357&elem=3333420
+link: https://raw.githubusercontent.com/riedde/ws-working-with-xml/refs/heads/main/style.css
 -->
 
 # Arbeiten mit XML
