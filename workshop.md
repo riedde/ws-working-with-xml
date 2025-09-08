@@ -164,6 +164,145 @@ XSLT ist eine mächtige Sprache zur Transformation von XML-Dokumenten.
 </xsl:stylesheet>
 ```
 
+## XSLT Übungen
+
+    --{{0}}--
+Lassen Sie uns das Gelernte mit praktischen Übungen vertiefen.
+
+### Aufgabe 1a: Namen formatieren
+
+    --{{0}}--
+Erste Schritte mit XSLT-Transformationen.
+
+**Aufgabe:**
+Erzeugen Sie aus der Datei `persName.xml` einen Text-Output nach folgender Form: `Nachname, Vorname`.
+
+    --{{1}}--
+**Lösung:**
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<xsl:stylesheet version="2.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+    xmlns:tei="http://www.tei-c.org/ns/1.0">
+    
+    <xsl:template match="/">
+        <xsl:value-of select="//tei:surname"/>, <xsl:value-of select="//tei:forename"/>
+    </xsl:template>
+    
+</xsl:stylesheet>
+```
+
+### Aufgabe 1b: XML Struktur ändern
+
+**Aufgabe:**
+Erzeugen Sie aus der Datei `persName.xml` einen XML-Output mit der Struktur:
+`<person><persName><surname/>, <forename/></persName></person>`
+
+    --{{1}}--
+**Lösung:**
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<xsl:stylesheet version="2.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+    xmlns:tei="http://www.tei-c.org/ns/1.0">
+    
+    <xsl:template match="/">
+        <person>
+            <persName>
+                <xsl:value-of select="//tei:surname"/>, <xsl:value-of select="//tei:forename"/>
+            </persName>
+        </person>
+    </xsl:template>
+    
+</xsl:stylesheet>
+```
+
+### Aufgabe 2a: HTML-Tabelle erstellen
+
+**Aufgabe:**
+Erstellen Sie eine HTML-Tabelle mit zwei Spalten:
+* Header Spalte 1: "Nachname"
+* Header Spalte 2: "Vorname"
+
+    --{{1}}--
+**Lösung:**
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<xsl:stylesheet version="2.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+    
+    <xsl:template match="/">
+        <html>
+            <body>
+                <table border="1">
+                    <tr>
+                        <th>Nachname</th>
+                        <th>Vorname</th>
+                    </tr>
+                </table>
+            </body>
+        </html>
+    </xsl:template>
+    
+</xsl:stylesheet>
+```
+
+### Aufgabe 2b: Tabelle mit Daten füllen
+
+**Aufgabe:**
+Befüllen Sie die Tabelle mit den Daten aus `listPerson.xml`.
+
+    --{{1}}--
+**Lösung:**
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<xsl:stylesheet version="2.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+    xmlns:tei="http://www.tei-c.org/ns/1.0">
+    
+    <xsl:template match="/">
+        <html>
+            <body>
+                <table border="1">
+                    <tr>
+                        <th>Nachname</th>
+                        <th>Vorname</th>
+                    </tr>
+                    <xsl:for-each select="//tei:person">
+                        <tr>
+                            <td><xsl:value-of select="tei:persName/tei:surname"/></td>
+                            <td><xsl:value-of select="string-join(tei:persName/tei:forename, ' ')"/></td>
+                        </tr>
+                    </xsl:for-each>
+                </table>
+            </body>
+        </html>
+    </xsl:template>
+    
+</xsl:stylesheet>
+```
+
+### Erweiterte Aufgaben
+
+#### Formatierung der Vornamen
+
+**Aufgabe:**
+1. Mehrere Vornamen mit `string-join()` verbinden
+2. Groß- und Kleinschreibung anpassen
+3. Leere Elemente mit `-/-` ersetzen
+
+    --{{1}}--
+**Lösung:**
+```xml
+<xsl:template match="tei:forename">
+    <xsl:choose>
+        <xsl:when test="normalize-space(.)">
+            <xsl:value-of select="concat(
+                upper-case(substring(.,1,1)),
+                lower-case(substring(.,2))
+            )"/>
+        </xsl:when>
+        <xsl:otherwise>-/-</xsl:otherwise>
+    </xsl:choose>
+</xsl:template>
+```
+
 ## XQuery Transformation
 
     --{{0}}--
@@ -183,6 +322,21 @@ for $person in //person
 where $person/beruf = "Musikwissenschaftler"
 order by $person/name/nachname
 return $person/name
+```
+
+### XQuery Übungen
+
+**Aufgabe:**
+Wiederholen Sie die XSLT-Aufgaben mit XQuery.
+
+    --{{1}}--
+**Lösung für Aufgabe 1a in XQuery:**
+```xquery
+xquery version "3.1";
+
+let $doc := doc("persName.xml")
+return
+    concat($doc//surname/text(), ", ", $doc//forename/text())
 ```
 
 ## Praktische Werkzeuge
