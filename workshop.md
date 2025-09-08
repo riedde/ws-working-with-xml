@@ -14,34 +14,37 @@ link: https://raw.githubusercontent.com/riedde/ws-working-with-xml/refs/heads/ma
 
 Ein Workshop zur Edirom Summer School 2025
 
-## Organisatorisches
+!["QR-Code zum LiaScript-Kurs"](resources/qr2course.png) <!-- style="width:25%" -->
 
-    --{{0}}--
+[https://mlu.de/b03ae](https://mlu.de/b03ae)
+
+
+Die Daten liegen frei zugänglich in einem [Github-Repository](https://github.com/riedde/ws-working-with-xml).
+
+
+## Organisatorisches
+ 
 Herzlich willkommen zum Workshop "Arbeiten mit XML"!
 
+{{0}}
 * Dozent: Jun.-Prof. Dr. Dennis Ried
-* Datum: 11.-12.09.2025
 * Raum: 1.110
 * Zeiten:
   
-  * Do: 11:15–17:45 Uhr
-  * Fr: 9:15–12:45 Uhr
+  * Do, 11.09.: 11:15–17:45 Uhr
+  * Fr, 12.09.: 9:15–12:45 Uhr
 
-## Vorstellungsrunde
-
-    --{{0}}--
-Beginnen wir mit einer kurzen Vorstellungsrunde.
-
-* Teilnehmende
-
+{{1}}
+* Vorstellungsrunde
+  
   * Name, ggf. Institution
   * Vorerfahrungen mit dem Thema
-  * Erwartungen an den Workshop/Eigene Ziele
+  * Erwartungen und Ziele
 
-* Kurzvorstellung des Dozenten
-* Überblick über die Kurszeiten
+              {{2}}
+**********************************
 
-## Ablaufplan
+* Kursplan
 
 | # | Datum | Uhrzeit | Inhalt |
 | :--- | :---- | :------ | :----- |
@@ -51,23 +54,31 @@ Beginnen wir mit einer kurzen Vorstellungsrunde.
 | 4 | 12.09.| 09:15–10:45 | Transformation mit XQuery |
 | 5 | 12.09.| 11:15–12:45 | XML-Schema-Erzeugung, Refaktorierung, Apache ANT |
 
+**********************************
 ## XML Grundlagen
 
-    --{{0}}--
-Lassen Sie uns zunächst die grundlegenden Konzepte von XML kennenlernen.
+Wir wollen zunächst die grundlegenden Konzepte von XML kennenlernen.
 
 ### Was ist XML?
 
-* eXtensible Markup Language
+* e**X**tensible **M**arkup **L**anguage
 * Auszeichnungssprache zur Strukturierung von Daten
+  
+  * Semantische Ebene
+
 * Hierarchische Baumstruktur
 * Menschen- und maschinenlesbar
+* Textformat
+  
+  * non-proprietär, nicht plattformgebunden
+  * langzeitarchivierbar
+  * Versionsverwaltung möglich (git, svn)
 
 ### Beispiel eines XML-Dokuments
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
-<person>
+<person xmlns="http://ess.upb.de/2025/arbeiten-mit-xml">
     <name>
         <vorname>Dennis</vorname>
         <nachname>Ried</nachname>
@@ -79,10 +90,24 @@ Lassen Sie uns zunächst die grundlegenden Konzepte von XML kennenlernen.
 
 ### XML-Grundelemente
 
-* Elemente: `<name/>`
-* Attribute: `<name art="amtlich">`
+Die wichtigsten Aspekte zum Thema XML:
+
+{{3}}
+****************
 * XML-Deklaration: `<?xml version="1.0" encoding="UTF-8"?>`
-* Namespaces: `xmlns="http://www.example.org"`
+* Schema (xsd, rng, TEI-ODD)
+*****************
+{{1}}
+****************
+* Elemente: `<beruf/>`
+  
+  {{4}}
+  * Namespaces: `xmlns="http://ess.upb.de/2025/arbeiten-mit-xml"`
+* Attribute: `<beruf status="aktiv">`
+****************
+{{2}}
+****************
+* 
 * Entitäten:
 
   * `&` = `&amp;`
@@ -90,35 +115,63 @@ Lassen Sie uns zunächst die grundlegenden Konzepte von XML kennenlernen.
   * `>` = `&gt;`
   * `"`= `&quot;`
   * `'`= `&apos;`
-  * [uvm.](https://wiki.selfhtml.org/wiki/Zeichenreferenz)
+  * [weitere...](https://wiki.selfhtml.org/wiki/Zeichenreferenz)
+****************
 
 ### Wohlgeformtheit
 
 Ein XML-Dokument ist wohlgeformt wenn...
 
+{{1}}
 * es genau ein Wurzelelement hat
-* alle Elemente korrekt geschlossen sind
-* Elemente ineinander geschachtelt und nicht verschränkt (!) sind
 
+{{2}}
+* alle Elemente korrekt geschlossen sind (`<a></a>` oder `<a/>`)
+
+{{3}}
+*********************************
+* Elemente ineinander geschachtelt und nicht verschränkt (!) sind
+  
+  * `<a><b></b></a>` --> richtig
+  * `<a><b></a></b>` --> falsch
+*********************************
+
+{{4}}
+*********************************
+Wohlgeformtes XML
+
+```xml
+<a>
+   <b>
+      <c/>
+   </b>
+</a>
+```
+*********************************
+
+{{5}}
+*********************************
 Zu Beachten:
 
 * Was auf geht, muss auch zu gehn!
 * Groß-/Kleinschreibung!
+*********************************
 
 ## XPath - Navigation in XML
 
-    --{{0}}--
 XPath ist wie ein Navigationssystem für XML-Dokumente.
 
 ### XPath-Basics
-
+{{0}}
 * Die wichtigsten Achsen:
-
+  
   * `self::node()`
   * `parent::node()`, `child::node()`
   * `ancestor::node()`, `descendant::node()`
-  * `following::node()`, `preceding::node()`
   * `following-sibling::node()`, `preceding-sibling::node()`
+  * `following::node()`, `preceding::node()`
+
+    {{1}}
 
 `````````````````````````````````````````````````` 
                                    .-+-. 
@@ -151,26 +204,108 @@ XPath ist wie ein Navigationssystem für XML-Dokumente.
 ``````````````````````````````````````````````````
 
 ### Navigation mit XPath
+{{0}}
+* Dateipfade (Analogie): `Ordner/Unterordner/Datei`
 
-* Analogie zu Dateipfaden
+{{1}}
+*********************************
+* Beispiel von vorhin:
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<person xmlns="http://ess.upb.de/2025/arbeiten-mit-xml">
+    <name>
+        <vorname>Dennis</vorname>
+        <nachname>Ried</nachname>
+    </name>
+    <alter>35</alter>
+    <beruf status="aktiv">Musikwissenschaftler</beruf>
+</person>
+```
+*********************************
+  {{2}}
+  * XML-Pfad  `person/name/vorname`
+  
+{{3}}
+*********************************
 * Kurzschreibweise
+
+  * `//vorname` oder `person//vorname`
+
+*********************************
+{{4}}
+*********************************
 * Ansteuerung von Attributen
+  
+  * `//beruf/@status`
+
+*********************************
+{{5}}
+*********************************
 * Ansteuerung von Daten-Typen (text, data, number)
-* Filtern [Eckige Klammern in XPath]
+
+  * `//vorname/text()`
+  * `//alter/text()` oder `//alter/number()``
+  * `//text()`
+*********************************
+{{6}}
+* Filtern – Eckige Klammern in XPath
+  
+  * `//person/name[vorname]`
+    
+    - Alle `name`-Elemente, die einen `vorname`-Element enthalten.
+    - Aber: Keine Aussage über Inhalt von `vorname`!
+  
+  * `//beruf[@status="aktiv"]/text()`
+
+    - Alle Textknoten, die sich eine Ebene unterhalb von `beruf` befinden, sofern das `beruf`-Element ein Attribut `@status` mit dem Wert `aktiv` aufweist.
+
+### Übung
+
+                 {{0}}
+************************************************
+
+Verwende in OxygenXML den XPath-Baumeister und steuere in der Datei `listPerson_short.xml` folgendes an:
+
+* Alle Nachnamen
+* Alle Personen, die mehrere Vornamen haben
+
+************************************************
+
+                 {{1}}
+************************************************
+
+Verwende für die folgenden Aufgaben nun die Datei `listPerson_short.xml`
+
+* Gesamtzahl der Personen mit mehreren Vornamen (Tipp: `count()`)
+* Die maximale Anzahl an Vornamen
+* Alle Personen, deren Nachname mit einem "M" beginnt
+
+************************************************
 
 ## XSLT Transformation
 
-    --{{0}}--
 XSLT ist eine mächtige Sprache zur Transformation von XML-Dokumenten.
 
 ### Was ist XSLT?
 
-* eXtensible Stylesheet Language Transformation
+* e**X**tensible **S**tylesheet **L**anguage **T**ransformation
 * Transformationssprache für XML
-* Erzeugt neue Dokumente aus XML-Daten
+
+  * Verarbeitungsanweiung/Schablone
+  * Skript muss ausgeführt werden (Saxon)
+
+* Erlaubt das erzeugen neuer Dokumente aus XML-Daten
+  
+  * input.xml -> output.xml
+
 * Ausgabeformate: XML, HTML, Text, etc.
 
 ### Grundlagen XSLT
+
+{{0}}
+*****************************************
+So sieht ein XSLT-Script aus:
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -183,174 +318,309 @@ XSLT ist eine mächtige Sprache zur Transformation von XML-Dokumenten.
     
 </xsl:stylesheet>
 ```
+*****************************************
+
+{{1}}
+*****************************************
+- Ein **Template** ist eine Art Schablone, die immer dann zum Einsatz kommt, wenn das Ergebnis der Prüfung im Attribut `@match` wahr ist.
+- Das erste Template entscheidet, was überhaupt verarbeitetet werden kann (hier: root `/`, d.h. alles innerhalb des Dokuments)
+- Wenn weitere Templates hinzugefügt werden, ist es nötig die Verhaltensweise zu definieren
+*****************************************
 
 ## XSLT Übungen
 
-    --{{0}}--
-Lassen Sie uns das Gelernte mit praktischen Übungen vertiefen.
+Lass uns das Gelernte mit praktischen Übungen vertiefen.
 
-### Aufgabe 1a: Namen formatieren
+### Aufgabe 1: HTML-Liste erstellen
 
-    --{{0}}--
-Erste Schritte mit XSLT-Transformationen.
+{{0}}
+_Tipp: Kleine Bausteine sind leichter zu überblicken, als große_; wir verwenden nun zwei Templates
 
-**Aufgabe:**
-Erzeugen Sie aus der Datei `persName.xml` einen Text-Output nach folgender Form: `Nachname, Vorname`.
+{{1}}
+*****************************************
+Hier ist der Rahmen für die HTML-Liste, den Inhalt müsst ihr selbst erzeugen.
 
-    --{{1}}--
-**Lösung:**
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
-<xsl:stylesheet version="2.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-    xmlns:tei="http://www.tei-c.org/ns/1.0">
+<xsl:stylesheet version="2.0"
+    xmlns:tei="http://www.tei-c.org/ns/1.0"
+    xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
     
     <xsl:template match="/">
-        <xsl:value-of select="//tei:surname"/>, <xsl:value-of select="//tei:forename"/>
-    </xsl:template>
-    
-</xsl:stylesheet>
-```
-
-### Aufgabe 1b: XML Struktur ändern
-
-**Aufgabe:**
-Erzeugen Sie aus der Datei `persName.xml` einen XML-Output mit der Struktur:
-`<person><persName><surname/>, <forename/></persName></person>`
-
-    --{{1}}--
-**Lösung:**
-```xml
-<?xml version="1.0" encoding="UTF-8"?>
-<xsl:stylesheet version="2.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-    xmlns:tei="http://www.tei-c.org/ns/1.0">
-    
-    <xsl:template match="/">
-        <person>
-            <persName>
-                <xsl:value-of select="//tei:surname"/>, <xsl:value-of select="//tei:forename"/>
-            </persName>
-        </person>
-    </xsl:template>
-    
-</xsl:stylesheet>
-```
-
-### Aufgabe 2a: HTML-Tabelle erstellen
-
-**Aufgabe:**
-Erstellen Sie eine HTML-Tabelle mit zwei Spalten:
-* Header Spalte 1: "Nachname"
-* Header Spalte 2: "Vorname"
-
-    --{{1}}--
-**Lösung:**
-```xml
-<?xml version="1.0" encoding="UTF-8"?>
-<xsl:stylesheet version="2.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
-    
-    <xsl:template match="/">
-        <html>
+        <html xmlns="http://www.w3.org/1999/xhtml">
+            <head>
+                <title>Meine Ergebnisliste</title>
+            </head>
             <body>
-                <table border="1">
-                    <tr>
-                        <th>Nachname</th>
-                        <th>Vorname</th>
-                    </tr>
-                </table>
+                <ul>
+                    <xsl:apply-templates/>
+                </ul>
             </body>
         </html>
     </xsl:template>
-    
-</xsl:stylesheet>
-```
 
-### Aufgabe 2b: Tabelle mit Daten füllen
-
-**Aufgabe:**
-Befüllen Sie die Tabelle mit den Daten aus `listPerson.xml`.
-
-    --{{1}}--
-**Lösung:**
-```xml
-<?xml version="1.0" encoding="UTF-8"?>
-<xsl:stylesheet version="2.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-    xmlns:tei="http://www.tei-c.org/ns/1.0">
-    
-    <xsl:template match="/">
-        <html>
-            <body>
-                <table border="1">
-                    <tr>
-                        <th>Nachname</th>
-                        <th>Vorname</th>
-                    </tr>
-                    <xsl:for-each select="//tei:person">
-                        <tr>
-                            <td><xsl:value-of select="tei:persName/tei:surname"/></td>
-                            <td><xsl:value-of select="string-join(tei:persName/tei:forename, ' ')"/></td>
-                        </tr>
-                    </xsl:for-each>
-                </table>
-            </body>
-        </html>
+    <xsl:template match="tei:person">
+        <li xmlns="http://www.w3.org/1999/xhtml">    
+            <xsl:value-of select="..."/>
+        </li>
     </xsl:template>
     
 </xsl:stylesheet>
 ```
+*****************************************
 
-### Erweiterte Aufgaben
+{{2}}
+*****************************************
+**Klappt nicht?**
 
-#### Formatierung der Vornamen
+- "OxygenXML meldet: _Could not parse_" -> Das XSLT ist nicht wohlgeformt/valide
+- "ich bekomme keine bzw. alle Namen in jedem `<li>` ausgegeben" -> Ist der Kontext richtig?
+- "irgendetwas anderes" -> Frag deinen Dozent, er hilft dir gerne!
+*****************************************
 
-**Aufgabe:**
-1. Mehrere Vornamen mit `string-join()` verbinden
-2. Groß- und Kleinschreibung anpassen
+
+### Aufgabe 2: HTML-Tabelle erstellen
+
+                 {{0}}
+************************************************
+
+**Aufgabe 2a:**
+
+Erstelle eine [HTML-Tabelle](https://www.w3schools.com/html/html_tables.asp) mit zwei Spalten:
+
+* Spalte 1: "Nachname"
+* Spalte 2: "Vorname"
+
+_Tipp: Du kannst den HTML-Rahmen aus der vorigen Übung verwenden, dann musst du nur den Inhalt des `<body>`-Elements neu gestalten._
+
+************************************************
+
+                 {{1}}
+************************************************
+
+**Lösung 2a:**
+
+```xml
+<xsl:template match="/">
+    <html>
+        <body>
+            <table>
+                <tr>
+                    <th>Nachname</th>
+                    <th>Vorname</th>
+                </tr>
+                <xsl:apply-templates/>
+            </table>
+        </body>
+    </html>
+</xsl:template>
+```
+
+************************************************
+
+                 {{2}}
+************************************************
+
+**Aufgabe 2b:**
+Befülle die Tabelle mit den Daten aus `listPerson.xml`.
+
+************************************************
+
+                 {{3}}
+************************************************
+
+**Lösung 2b:**
+
+```xml
+<xsl:template match="tei:person">
+    <tr>
+        <td><xsl:value-of select=".//tei:surname"/></td>
+        <td><xsl:value-of select=".//tei:forename"/></td>
+    </tr>
+</xsl:template>
+```
+
+************************************************
+
+### Intermezzo: Schleifen
+
+Was genau macht `<xsl:template match="tei:person">` eigentlich?
+
+Jedes Mal, wenn ein TEI-Element namens `person` auftaucht, wird die Operation im Template ausgeführt.
+Das Ganze kann man auch als Schleife ausdrücken. Der XSLT-Befehlt dafür heißt `<xsl:for-each>`.
+
+```xml
+<xsl:for-each select="//tei:person">
+    <tr>
+        <td><xsl:value-of select=".//tei:surname"/></td>
+        <td><xsl:value-of select=".//tei:forename"/></td>
+    </tr>
+</xsl:for-each>
+```
+
+Warum aber sollte man das machen?
+
+Ganz einfach: Mit `<xsl:for-each>` können wir die Daten sortieren.
+
+```xml
+<table>
+    <tr>
+        <th>Nachname</th>
+        <th>Vorname</th>
+    </tr>
+    <xsl:for-each select=".//tei:person">
+        <xsl:sort order="ascending" select=".//tei:surname"/>
+        <tr>
+            <td><xsl:value-of select=".//tei:surname"/></td>
+            <td><xsl:value-of select=".//tei:forename"/></td>
+        </tr>
+    </xsl:for-each>
+</table>
+```
+
+### Aufgabe 3
+
+**Aufgaben:**
+
+1. Mehrere Vornamen mit [`string-join()`](https://www.datypic.com/xq/fn_string-join.html) verbinden
+2. Entfernung von Partikeln `von` für eine bessere Sortierung
 3. Leere Elemente mit `-/-` ersetzen
 
-    --{{1}}--
-**Lösung:**
+_Tipp: Verwende Conditionals oder eine Auswahlfunktion_ (`xsl:if` oder `xsl:choose`)
+
+### Funktionen
+
+                 {{0}}
+************************************************
+
+Wenn du eine bestimmte Aktion wiederverwenden möchtest, kannst du eine eigene Funktion definieren.
+
+************************************************
+
+                 {{1}}
+************************************************
+
+Zum Beispiel um Namen für die Sortierung zu bereinigen:
+
 ```xml
-<xsl:template match="tei:forename">
+<xsl:function name="my:betterSort">
+    <xsl:param name="name" as="element()"/>
     <xsl:choose>
-        <xsl:when test="normalize-space(.)">
-            <xsl:value-of select="concat(
-                upper-case(substring(.,1,1)),
-                lower-case(substring(.,2))
-            )"/>
+        <xsl:when test="starts-with($name,'von ')">
+            <xsl:value-of select="substring-after($name,'von ')"/>
         </xsl:when>
-        <xsl:otherwise>-/-</xsl:otherwise>
+        <xsl:otherwise>
+            <xsl:value-of select="$name"/>
+        </xsl:otherwise>
     </xsl:choose>
-</xsl:template>
+</xsl:function>
+
+<!-- Anwendung: -->
+<xsl:sort order="ascending" select="my:betterSort(.//tei:surname)"/>
+```
+
+---------------
+************************************************
+
+                 {{2}}
+************************************************
+
+Oder um den zweiten und jeden weiteren Vornamen abzuhürzen:
+
+```xml
+<xsl:function name="my:nameShortener">
+    <xsl:param name="names" as="element()*"/>
+    <xsl:choose>
+        <xsl:when test="count($names) gt 1">
+            <xsl:value-of select="$names[1]"/>
+            <xsl:text> </xsl:text>
+            <xsl:for-each select="$names[position() > 1]">
+                <xsl:value-of select="concat(substring(.,1,1),'.')"/>   
+            </xsl:for-each>
+            
+        </xsl:when>
+        <xsl:otherwise>
+            <xsl:value-of select="$names"/>
+        </xsl:otherwise>
+    </xsl:choose>
+</xsl:function>
+
+<!-- Anwendung: -->
+<xsl:value-of select="my:nameShortener(.//tei:forename)"/>
+```
+
+************************************************
+
+### Best Practice
+
+Dokumentation ist alles!
+
+Helft euch selbst und allen, die eure Skripte nachnutzen oder überarbeiten wollen/sollen/müssen: Schreibt Kommentare in die Skripte, damit man versteht, was dort passiert.
+
+1. Möglichkeit: XML-Kommentar `<!-- Ein Kommentar -->`
+2. Möglichkeit: [XSLTdoc](https://xsltdoc.github.io/) verwenden
+
+```xml
+<!-- xmlns:xd="http://www.pnp-software.com/XSLTdoc" -->
+
+<xd:doc>Diese Funktion konvertiert einen Namen in
+    Kleinbuchstaben und eliminiert den string "von ",
+    sofern vorhanden.</xd:doc>
+<xsl:function name="my:betterSort">
+    [...]
+</xsl:function>
 ```
 
 ## XQuery Transformation
 
-    --{{0}}--
 XQuery ermöglicht uns komplexe Abfragen und Transformationen von XML-Daten.
 
 ### Was ist XQuery?
 
-* XML Query Language
+* e**X**tensible **Query** Language (XQL)
 * Abfragesprache für XML-Daten
-* FLOWR-Ausdrücke (For, Let, Order by, Where, Return)
+* FLOWR-Ausdrücke
+  
+  | XQL   | Bedeutung   | XSLT   |
+  | :--------- | :--------- | :--------- |
+  | **F**or | Schleife | `xsl:for-each` |
+  | **L**et | Variable | `xsl:variable` |
+  | **O**rder by | Sortierung |  `xsl:sort`|
+  | **W**here | Filter | [über XPath] |
+  | **R**eturn | Rückgabe | [nicht nötig] |
+
 * Ideal für Datenbankabfragen
+  
+  * Kann in [eXist-db](https://exist-db.org/exist/apps/homepage/index.html) ausgeführt werden.
+  * erlaubt Update-Funktionen
+  * erlaubt mehrstufige Verarbeitungsanweiung
+  * erlaubt JSON-Maps als output (DB-interne Verarbeitung)
 
 ### XQuery Beispiel
 
 ```xquery
-for $person in //person
-where $person/beruf = "Musikwissenschaftler"
-order by $person/name/nachname
-return $person/name
+xquery version "3.1";
+
+declare namespace tei="http://www.tei-c.org/ns/1.0";
+declare namespace mei="http://www.music-encoding.org/ns/mei";
+
+let $document := doc('examples/listPerson.xml')
+
+for $person in $document//tei:person
+    where starts-with($person//tei:surname, 'M')
+    order by $person//tei:surname
+    return
+        $person
 ```
 
 ### XQuery Übungen
 
 **Aufgabe:**
+
 Wiederholen Sie die XSLT-Aufgaben mit XQuery.
 
-    --{{1}}--
 **Lösung für Aufgabe 1a in XQuery:**
+
 ```xquery
 xquery version "3.1";
 
@@ -361,11 +631,22 @@ return
 
 ## Praktische Werkzeuge
 
-    --{{0}}--
 Zum Abschluss schauen wir uns wichtige Werkzeuge für die XML-Arbeit an.
 
 ### XML-Schema und Tools
 
 * XML-Schema-Erzeugung mit Oxygen XML Editor
+  
+  * Schema erzeugen, Daten validieren
+
 * Refaktorierung von XML-Dokumenten
+  
+  * OxygenXML hat XSLTs integriert!
+
+* XSLT mit OxygenXML ausführen
+
 * Apache ANT für Build-Prozesse
+  
+  * Datenpakete bauen (.zip, .xar)
+  * Daten prozessieren (sortieren, bereinigen)
+  * XSLT via Ant auf der Komandozeile ausführen

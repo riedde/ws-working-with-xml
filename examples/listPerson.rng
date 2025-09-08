@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<grammar ns="http://www.tei-c.org/ns/1.0" xmlns="http://relaxng.org/ns/structure/1.0">
+  <start>
+    <element name="listPerson">
+      <oneOrMore>
+        <element name="person">
+          <element name="persName">
+            <oneOrMore>
+              <element name="forename">
+                <text/>
+              </element>
+            </oneOrMore>
+            <element name="surname">
+              <text/>
+            </element>
+          </element>
+        </element>
+      </oneOrMore>
+    </element>
+  </start>
+</grammar>
